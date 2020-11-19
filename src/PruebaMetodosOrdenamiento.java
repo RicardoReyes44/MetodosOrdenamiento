@@ -33,9 +33,12 @@ class MetodosOrdenamiento{
 						numeros[j+1] = aux;
 					}
 				}
-			}
-        	
+			}	
 		}
+        
+        public static void ordenacionBurbuja3(int []numeros) {
+        	
+        }
         
 	}// class Burbuja
 	
