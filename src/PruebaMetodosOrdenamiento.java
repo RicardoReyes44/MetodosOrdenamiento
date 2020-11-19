@@ -8,6 +8,17 @@ class MetodosOrdenamiento{
        
         public static void ordenacionBurbuja1(int []numeros) {
 			
+			for(int i=1; i<=numeros.length-1; i++) {
+				
+				for(int j=0; j<=numeros.length-i-1; j++) {
+					
+					if(numeros[j]>numeros[j+1]) {
+						int aux = numeros[j];
+						numeros[j] = numeros[j+1];
+						numeros[j+1] = aux;
+					}
+				}
+			}
 			
 		}
 		
