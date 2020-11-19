@@ -102,5 +102,74 @@ public class PruebaMetodosOrdenamiento {
 			}
 		}
 	}
+    
+    public static void main(String[] args) {
+
+		Scanner entrada = new Scanner(System.in);
+
+		long array[];
+		boolean candado = true;
+
+		while(true) {
+			try {
+				array = ingresar();
+				break;
+			}catch(InputMismatchException error){
+				System.out.println("Error " + error + " en la entrada de datos");
+			}
+			System.out.println();
+		}
+
+        while(candado) {
+        	
+        	System.out.println("------------MENU-------------");
+        	System.out.println("1.- Crear nuevo array");
+        	System.out.println("2.- Metodo 1 de ordenamiento");
+        	System.out.println("3.- Metodo 2 de ordenamiento");
+        	System.out.println("4.- Metodo 3 de ordenamiento");
+        	System.out.println("5.- Salir");
+        	System.out.print("Introduce una opcion: ");
+			
+        	
+        	try {
+        		int opcion = entrada.nextInt();
+            	
+    			switch(opcion) {
+    			
+    			case 1:
+    				array = ingresar();
+    				break;
+
+    			case 2:
+    				MetodosOrdenamiento.Burbuja.ordenacionBurbuja1(array);
+    				MetodosOrdenamiento.Burbuja.mostrar(array);
+    				break;
+
+    			case 3:
+    				MetodosOrdenamiento.Burbuja.ordenacionBurbuja2(array);
+    				MetodosOrdenamiento.Burbuja.mostrar(array);
+    				break;
+
+    			case 4:
+    				MetodosOrdenamiento.Burbuja.ordenacionBurbuja3(array);
+    				MetodosOrdenamiento.Burbuja.mostrar(array);
+    				break;
+
+    			case 5:
+    				candado = false;
+    				System.out.println("--------------Programa terminado-----------");
+    				break;
+
+    			default:
+    				System.out.println("Opcion inexistente, por favor prueba de nuevo");
+    				break;
+    			}
+        	}catch(InputMismatchException error){
+        		System.out.println("Error <" + error + "> en la entrada de datos");
+        	    entrada.nextLine();
+        	}
+			System.out.println();
+		}
+	}
 
 }
