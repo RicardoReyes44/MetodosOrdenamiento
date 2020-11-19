@@ -74,6 +74,15 @@ class MetodosOrdenamiento{
 
 public class PruebaMetodosOrdenamiento {
 	
-	
+    public static long[] aleatorio(int cantidad, int limite) {
+		
+		long []array = new long[cantidad];
+		
+		for(int i=0; i<cantidad; i++) {
+			array[i] = (long)(Math.random()*limite);
+		}
+		
+		return array;
+	}
 
 }
