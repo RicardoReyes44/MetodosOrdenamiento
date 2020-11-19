@@ -84,5 +84,23 @@ public class PruebaMetodosOrdenamiento {
 		
 		return array;
 	}
+    
+    public static long[] ingresar() {
+		
+		Scanner entrada = new Scanner(System.in);
+		
+		while(true) {
+			System.out.println("Introduce cantidad de elementos: ");
+			int cantidad = entrada.nextInt();
+			System.out.println("Introduce limite: ");
+			int limite = entrada.nextInt();
+			
+			if(cantidad>0 && limite>0) {
+				return aleatorio(cantidad, limite+1);
+			}else {
+				System.out.println("Error en entrada de datos, intenta de nuevo");
+			}
+		}
+	}
 
 }
