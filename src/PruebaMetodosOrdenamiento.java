@@ -6,7 +6,7 @@ class MetodosOrdenamiento{
 	static long tInicio, tFin;
 	static class Burbuja{
        
-        public static void ordenacionBurbuja1(int []numeros) {
+       public static void ordenacionBurbuja1(int []numeros) {
 			
 			for(int i=1; i<=numeros.length-1; i++) {
 				
@@ -18,10 +18,14 @@ class MetodosOrdenamiento{
 						numeros[j+1] = aux;
 					}
 				}
-			}
-			
+			}	
 		}
 		
+        public static void ordenacionBurbuja2(int []numeros) {
+        	
+
+		}
+        
 	}// class Burbuja
 	
 	
