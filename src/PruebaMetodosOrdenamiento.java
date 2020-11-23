@@ -68,6 +68,28 @@ class MetodosOrdenamiento{
         }
         
 	}// class Burbuja
+	
+	static class Insercion {
+		public static void ordenadorInsercion(long []numeros) {
+			long aux;
+			
+			tInicio = System.nanoTime();
+			for(int i=1; i<numeros.length; i++) {
+				aux = numeros[i];
+				
+				
+				
+				for(int j=i-1; j>=0 && numeros[j]>aux; j--) {
+					
+					numeros[j+1] = numeros[j];
+					numeros[j] = aux;
+					
+				}// segundo for
+			}// primero for
+			tFin = System.nanoTime();
+			System.out.println("Tiempo de ejecucion en ordenamiento por burbuja: " + (tFin-tInicio));
+		}
+	}
 
 }//class MetodosOrdenamiento
 
@@ -127,7 +149,8 @@ public class PruebaMetodosOrdenamiento {
         	System.out.println("2.- Metodo 1 de ordenamiento");
         	System.out.println("3.- Metodo 2 de ordenamiento");
         	System.out.println("4.- Metodo 3 de ordenamiento");
-        	System.out.println("5.- Salir");
+        	System.out.println("5.- Metodo de insercion");
+        	System.out.println("6.- Salir");
         	System.out.print("Introduce una opcion: ");
 			
         	
@@ -154,8 +177,13 @@ public class PruebaMetodosOrdenamiento {
     				MetodosOrdenamiento.Burbuja.ordenacionBurbuja3(array);
     				MetodosOrdenamiento.Burbuja.mostrar(array);
     				break;
-
+    			
     			case 5:
+    				MetodosOrdenamiento.Insercion.ordenadorInsercion(array);
+    				MetodosOrdenamiento.Burbuja.mostrar(array);
+    				break;
+
+    			case 6:
     				candado = false;
     				System.out.println("--------------Programa terminado-----------");
     				break;
