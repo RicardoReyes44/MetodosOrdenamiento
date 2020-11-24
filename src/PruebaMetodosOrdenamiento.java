@@ -87,10 +87,29 @@ class MetodosOrdenamiento{
 				}// segundo for
 			}// primero for
 			tFin = System.nanoTime();
-			System.out.println("Tiempo de ejecucion en ordenamiento por burbuja: " + (tFin-tInicio));
+			System.out.println("Tiempo de ejecucion en ordenamiento: " + (tFin-tInicio));
 		}
 	}
 
+	public static class OrdenamientoPorSeleccion{
+
+		public static void ordenamientoSeleccion(long []numeros) {
+			tInicio = System.nanoTime();
+			for(int i=0; i<numeros.length-1; i++) {
+				
+				for(int j=i; j<numeros.length; j++) {
+					
+					if(numeros[i]>numeros[j]) {
+						long minimo = numeros[i];
+						numeros[i] = numeros[j];
+						numeros[j] = minimo;	
+					}
+				}
+			}
+			tFin = System.nanoTime();
+			System.out.println("Tiempo de ejecucion en ordenamiento: " + (tFin-tInicio));
+		}
+	}
 }//class MetodosOrdenamiento
 
 
@@ -146,13 +165,15 @@ public class PruebaMetodosOrdenamiento {
         	
         	System.out.println("------------MENU-------------");
         	System.out.println("1.- Crear nuevo array");
-        	System.out.println("2.- Metodo 1 de ordenamiento");
-        	System.out.println("3.- Metodo 2 de ordenamiento");
-        	System.out.println("4.- Metodo 3 de ordenamiento");
+        	System.out.println("2.- Metodo burbuja 1 de ordenamiento");
+        	System.out.println("3.- Metodo burbuja 2 de ordenamiento");
+        	System.out.println("4.- Metodo burbuja 3 de ordenamiento");
         	System.out.println("5.- Metodo de insercion");
-        	System.out.println("6.- Salir");
+        	System.out.println("6.- Metodo de seleccion");
+        	System.out.println("7.- Salir");
         	System.out.print("Introduce una opcion: ");
 			
+        	long []array2 = array.clone();
         	
         	try {
         		int opcion = entrada.nextInt();
@@ -161,29 +182,35 @@ public class PruebaMetodosOrdenamiento {
     			
     			case 1:
     				array = ingresar();
+    				array2 = array.clone();
     				break;
 
     			case 2:
-    				MetodosOrdenamiento.Burbuja.ordenacionBurbuja1(array);
-    				MetodosOrdenamiento.Burbuja.mostrar(array);
+    				MetodosOrdenamiento.Burbuja.ordenacionBurbuja1(array2);
+    				MetodosOrdenamiento.Burbuja.mostrar(array2);
     				break;
 
     			case 3:
-    				MetodosOrdenamiento.Burbuja.ordenacionBurbuja2(array);
-    				MetodosOrdenamiento.Burbuja.mostrar(array);
+    				MetodosOrdenamiento.Burbuja.ordenacionBurbuja2(array2);
+    				MetodosOrdenamiento.Burbuja.mostrar(array2);
     				break;
 
     			case 4:
-    				MetodosOrdenamiento.Burbuja.ordenacionBurbuja3(array);
-    				MetodosOrdenamiento.Burbuja.mostrar(array);
+    				MetodosOrdenamiento.Burbuja.ordenacionBurbuja3(array2);
+    				MetodosOrdenamiento.Burbuja.mostrar(array2);
     				break;
     			
     			case 5:
-    				MetodosOrdenamiento.Insercion.ordenadorInsercion(array);
-    				MetodosOrdenamiento.Burbuja.mostrar(array);
+    				MetodosOrdenamiento.Insercion.ordenadorInsercion(array2);
+    				MetodosOrdenamiento.Burbuja.mostrar(array2);
     				break;
 
     			case 6:
+    				MetodosOrdenamiento.OrdenamientoPorSeleccion.ordenamientoSeleccion(array2);
+    				MetodosOrdenamiento.Burbuja.mostrar(array2);
+    				break;
+    			
+    			case 7:
     				candado = false;
     				System.out.println("--------------Programa terminado-----------");
     				break;
