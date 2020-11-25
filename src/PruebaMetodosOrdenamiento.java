@@ -64,7 +64,7 @@ class MetodosOrdenamiento{
         }
         
         public static void mostrar(long[] array) {
-        	System.out.println(Arrays.toString(array));
+        	System.out.println("Array ordenado: " + Arrays.toString(array));
         }
         
 	}// class Burbuja
@@ -108,6 +108,45 @@ class MetodosOrdenamiento{
 			}
 			tFin = System.nanoTime();
 			System.out.println("Tiempo de ejecucion en ordenamiento: " + (tFin-tInicio));
+		}
+	}
+	
+	public static class QuickSort{
+
+		public static long[] ejecutar(long[] array) {
+			tInicio = System.nanoTime();
+			
+			long []ordenado = quickSort(array, 0, array.length-1);
+			
+			tFin = System.nanoTime();
+			System.out.println("Tiempo de ejecucion en ordenamiento: " + (tFin-tInicio));
+			
+			return ordenado;
+		}
+		
+		public static long[] quickSort(long[] array, int izq, int der){
+			long pivote = array[izq];
+			int i = izq, j=der;
+			long aux;
+			
+			while(i<j) {
+				while(array[i]<=pivote && i<j) i++;
+				while(array[j]>pivote) j--;
+				if(i<j) {
+					aux = array[i];
+					array[i] = array[j];
+					array[j] = aux;
+				}
+			}
+			array[izq] = array[j];
+			array[j] = pivote;
+			
+			if(izq<j-1)
+				quickSort(array, izq, j-1);
+			if(j+1<der)
+				quickSort(array, j+1, der);
+			
+			return array;
 		}
 	}
 }//class MetodosOrdenamiento
@@ -170,7 +209,8 @@ public class PruebaMetodosOrdenamiento {
         	System.out.println("4.- Metodo burbuja 3 de ordenamiento");
         	System.out.println("5.- Metodo de insercion");
         	System.out.println("6.- Metodo de seleccion");
-        	System.out.println("7.- Salir");
+        	System.out.println("7.- Metodo de rapido");
+        	System.out.println("8.- Salir");
         	System.out.print("Introduce una opcion: ");
 			
         	long []array2 = array.clone();
@@ -178,6 +218,8 @@ public class PruebaMetodosOrdenamiento {
         	try {
         		int opcion = entrada.nextInt();
             	
+        		System.out.println("Array original: " + Arrays.toString(array2));
+        		
     			switch(opcion) {
     			
     			case 1:
@@ -211,6 +253,11 @@ public class PruebaMetodosOrdenamiento {
     				break;
     			
     			case 7:
+    				long ordenado[] = MetodosOrdenamiento.QuickSort.ejecutar(array2);
+    				MetodosOrdenamiento.Burbuja.mostrar(ordenado);
+    				break;
+    			
+    			case 8:
     				candado = false;
     				System.out.println("--------------Programa terminado-----------");
     				break;
@@ -226,5 +273,4 @@ public class PruebaMetodosOrdenamiento {
 			System.out.println();
 		}
 	}
-
 }

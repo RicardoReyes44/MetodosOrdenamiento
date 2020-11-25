@@ -1,19 +1,29 @@
+import java.lang.reflect.Array;
 import java.util.Arrays;
 
-class OrdenamientoPorSeleccion{
-
-	public void ordenamientoSeleccion(int []numeros) {
-		for(int i=0; i<numeros.length-1; i++) {
-			
-			for(int j=i+1; j<numeros.length; j++) {
-				
-				if(numeros[i]>numeros[j]) {
-					int minimo = numeros[i];
-					numeros[i] = numeros[j];
-					numeros[j] = minimo;	
-				}
+class PruebaQuickSort{
+	public int[] quickSort(int[] array, int izq, int der){
+		int pivote = array[izq];
+		int i = izq, j=der;
+		int aux;
+		while(i<j) {
+			while(array[i]<=pivote && i<j) i++;
+			while(array[j]>pivote) j--;
+			if(i<j) {
+				aux = array[i];
+				array[i] = array[j];
+				array[j] = aux;
 			}
 		}
+		array[izq] = array[j];
+		array[j] = pivote;
+		
+		if(izq<j-1)
+			quickSort(array, izq, j-1);
+		if(j+1<der)
+			quickSort(array, j+1, der);
+		
+		return array;
 	}
 }
 
@@ -24,11 +34,10 @@ public class Prueba {
 
 		int []numeros = {6, 1, 10, 2, 8, 4, 6, 9};
 		
-		OrdenamientoPorSeleccion ops = new OrdenamientoPorSeleccion();
+		PruebaQuickSort pqs = new PruebaQuickSort();
 		
 		System.out.println("Numeros sin ordenador: " + Arrays.toString(numeros));
-		ops.ordenamientoSeleccion(numeros);
-		System.out.println("Numeros ordenados: " + Arrays.toString(numeros));
+		System.out.println("Numeros ordenados: " + Arrays.toString(pqs.quickSort(numeros, 0, numeros.length-1)));
 		
 		
 	}
