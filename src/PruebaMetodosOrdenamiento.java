@@ -63,10 +63,6 @@ class MetodosOrdenamiento{
 			System.out.println("Tiempo de ejecucion en ordenamiento por burbuja: " + (tFin-tInicio));
         }
         
-        public static void mostrar(long[] array) {
-        	System.out.println("Array ordenado: " + Arrays.toString(array));
-        }
-        
 	}// class Burbuja
 	
 	static class Insercion {
@@ -149,6 +145,43 @@ class MetodosOrdenamiento{
 			return array;
 		}
 	}
+	
+	static class ShellSort{
+		
+		public static void ordenar(long []numeros) {
+			
+			int intervalo = numeros.length/2;
+			tInicio = System.nanoTime();
+			
+			while(intervalo>0) {
+				for(int i=intervalo; i<numeros.length; i++) {
+					int j=i-intervalo;
+					while(j>=0) {
+						int k=j+intervalo;
+						if(numeros[j]<=numeros[k]) {
+							j=-1;
+						}else {
+							long aux=numeros[j];
+							numeros[j] = numeros[k];
+							numeros[k] = aux;
+							j-=intervalo;
+							
+						}
+					}
+				}
+				intervalo = intervalo/2;
+			}
+			
+			tFin = System.nanoTime();
+			System.out.println("Tiempo de ejecucion en ordenamiento: " + (tFin-tInicio));
+			
+		}
+		
+	}
+	
+	public static void mostrar(long[] array) {
+    	System.out.println("Array ordenado: " + Arrays.toString(array));
+    }
 }//class MetodosOrdenamiento
 
 
@@ -209,8 +242,9 @@ public class PruebaMetodosOrdenamiento {
         	System.out.println("4.- Metodo burbuja 3 de ordenamiento");
         	System.out.println("5.- Metodo de insercion");
         	System.out.println("6.- Metodo de seleccion");
-        	System.out.println("7.- Metodo de rapido");
-        	System.out.println("8.- Salir");
+        	System.out.println("7.- Metodo quick");
+        	System.out.println("8.- Metodo shell");
+        	System.out.println("9.- Salir");
         	System.out.print("Introduce una opcion: ");
 			
         	long []array2 = array.clone();
@@ -229,35 +263,40 @@ public class PruebaMetodosOrdenamiento {
 
     			case 2:
     				MetodosOrdenamiento.Burbuja.ordenacionBurbuja1(array2);
-    				MetodosOrdenamiento.Burbuja.mostrar(array2);
+    				MetodosOrdenamiento.mostrar(array2);
     				break;
 
     			case 3:
     				MetodosOrdenamiento.Burbuja.ordenacionBurbuja2(array2);
-    				MetodosOrdenamiento.Burbuja.mostrar(array2);
+    				MetodosOrdenamiento.mostrar(array2);
     				break;
 
     			case 4:
     				MetodosOrdenamiento.Burbuja.ordenacionBurbuja3(array2);
-    				MetodosOrdenamiento.Burbuja.mostrar(array2);
+    				MetodosOrdenamiento.mostrar(array2);
     				break;
     			
     			case 5:
     				MetodosOrdenamiento.Insercion.ordenadorInsercion(array2);
-    				MetodosOrdenamiento.Burbuja.mostrar(array2);
+    				MetodosOrdenamiento.mostrar(array2);
     				break;
 
     			case 6:
     				MetodosOrdenamiento.OrdenamientoPorSeleccion.ordenamientoSeleccion(array2);
-    				MetodosOrdenamiento.Burbuja.mostrar(array2);
+    				MetodosOrdenamiento.mostrar(array2);
     				break;
     			
     			case 7:
     				long ordenado[] = MetodosOrdenamiento.QuickSort.ejecutar(array2);
-    				MetodosOrdenamiento.Burbuja.mostrar(ordenado);
+    				MetodosOrdenamiento.mostrar(ordenado);
     				break;
     			
     			case 8:
+    				MetodosOrdenamiento.ShellSort.ordenar(array2);
+    				MetodosOrdenamiento.mostrar(array2);
+    				break;
+    			
+    			case 9:
     				candado = false;
     				System.out.println("--------------Programa terminado-----------");
     				break;
