@@ -179,6 +179,46 @@ class MetodosOrdenamiento{
 		
 	}
 	
+    static class Radix{
+		
+    	public static void orden(long[]numeros) {
+    	  tInicio = System.nanoTime();
+  	      if(numeros.length == 0)
+  	          return;
+  	          int[][] np = new int[numeros.length][2];
+  	          int[] q = new int[0x100];
+  	          int i,j,k,l,f = 0;
+  	          for(k=0;k<4;k++) {
+  	             for(i=0;i<(np.length-1);i++)
+  	             np[i][1] = i+1;
+  	             np[i][1] = -1;
+  	             for(i=0;i<q.length;i++)
+  	             q[i] = -1;
+  	             for(f=i=0;i<numeros.length;i++) {
+  	                j = (int)((0xFF<<(k<<3))&numeros[i])>>(k<<3);
+  	                if(q[j] == -1)
+  	                l = q[j] = f;
+  	             else {
+  	                l = q[j];
+  	                while(np[l][1] != -1)
+  	                l = np[l][1];
+  	                np[l][1] = f;
+  	                l = np[l][1];
+  	             }
+  	             f = np[f][1];
+  	             np[l][0] = (int)numeros[i];
+  	             np[l][1] = -1;
+  	          }
+  	          for(l=q[i=j=0];i<0x100;i++)
+  	          for(l=q[i];l!=-1;l=np[l][1])
+  	        	  numeros[j++] = np[l][0];
+  	       }//for
+  	       tFin = System.nanoTime();
+		   System.out.println("Tiempo de ejecucion en ordenamiento: " + (tFin-tInicio));
+  	}//metodo
+		
+	}
+	
 	public static void mostrar(long[] array) {
     	System.out.println("Array ordenado: " + Arrays.toString(array));
     }
@@ -244,7 +284,8 @@ public class PruebaMetodosOrdenamiento {
         	System.out.println("6.- Metodo de seleccion");
         	System.out.println("7.- Metodo quick");
         	System.out.println("8.- Metodo shell");
-        	System.out.println("9.- Salir");
+        	System.out.println("9.- Metodo radix");
+        	System.out.println("10.- Salir");
         	System.out.print("Introduce una opcion: ");
 			
         	long []array2 = array.clone();
@@ -297,6 +338,11 @@ public class PruebaMetodosOrdenamiento {
     				break;
     			
     			case 9:
+    				MetodosOrdenamiento.Radix.orden(array2);
+    				MetodosOrdenamiento.mostrar(array2);
+    				break;
+    			
+    			case 10:
     				candado = false;
     				System.out.println("--------------Programa terminado-----------");
     				break;

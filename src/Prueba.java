@@ -1,47 +1,48 @@
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
-class PruebaShellSort{
+class Radix{
 	
-	public void ordenar(int []numeros) {
-		
-		int intervalo = numeros.length/2;
-		
-		while(intervalo>0) {
-			for(int i=intervalo; i<numeros.length; i++) {
-				int j=i-intervalo;
-				while(j>=0) {
-					int k=j+intervalo;
-					if(numeros[j]<=numeros[k]) {
-						j=-1;
-					}else {
-						int aux=numeros[j];
-						numeros[j] = numeros[k];
-						numeros[k] = aux;
-						j-=intervalo;
-						
-					}
-				}
-			}
-			intervalo = intervalo/2;
-		}
-	}
-	
-}
-
-
+	public void orden(int[]numeros) {
+	      if(numeros.length == 0)
+	          return;
+	          int[][] np = new int[numeros.length][2];
+	          int[] q = new int[0x100];
+	          int i,j,k,l,f = 0;
+	          for(k=0;k<4;k++) {
+	             for(i=0;i<(np.length-1);i++)
+	             np[i][1] = i+1;
+	             np[i][1] = -1;
+	             for(i=0;i<q.length;i++)
+	             q[i] = -1;
+	             for(f=i=0;i<numeros.length;i++) {
+	                j = ((0xFF<<(k<<3))&numeros[i])>>(k<<3);
+	                if(q[j] == -1)
+	                l = q[j] = f;
+	             else {
+	                l = q[j];
+	                while(np[l][1] != -1)
+	                l = np[l][1];
+	                np[l][1] = f;
+	                l = np[l][1];
+	             }
+	             f = np[f][1];
+	             np[l][0] = numeros[i];
+	             np[l][1] = -1;
+	          }
+	          for(l=q[i=j=0];i<0x100;i++)
+	          for(l=q[i];l!=-1;l=np[l][1])
+	        	  numeros[j++] = np[l][0];
+	       }//for
+	}//metodo
+}//class Radix
 public class Prueba {
-
 	public static void main(String[] args) {
-
-		int []numeros = {6, 1, 10, 2, 8, 4, 6, 9};
+		int[]numeros= {15,54,87,89,56,32,58,29,73};
+		System.out.println("Desordenados: "+Arrays.toString(numeros));
 		
-		PruebaShellSort pss = new PruebaShellSort();
+		Radix rr= new Radix();
 		
-		System.out.println("Numeros sin ordenador: " + Arrays.toString(numeros));
-		pss.ordenar(numeros);
-		System.out.println("Numeros ordenados: " + Arrays.toString(numeros));
-		
+		rr.orden(numeros);
+		System.out.println("Ordenados: "+Arrays.toString(numeros));
 	}
-
 }
