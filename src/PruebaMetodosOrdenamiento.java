@@ -218,6 +218,43 @@ class MetodosOrdenamiento{
   	}//metodo
 		
 	}
+    
+    static class Intercalacion{
+    	
+    	public static long[] intercalacion(long numeros[], long numeros2[]) {
+    		
+    		long arrayOrdenado[] = new long[numeros.length+numeros2.length];
+    		
+        	int i=0, j=0, k=0;
+        	
+        	while(i<numeros.length && j<numeros2.length) {
+        		if(numeros[i]<numeros2[j]) {
+        			arrayOrdenado[k] = numeros[i];
+        			i++;
+        		}else {
+        			arrayOrdenado[k] = numeros2[j];
+        			j++;
+        		}
+        		k++;
+        	}
+        	
+        	while(i<numeros.length) {
+        		arrayOrdenado[k] = numeros[i];
+    			i++;
+    			k++;
+        	}
+        	
+            while(j<numeros2.length) {
+            	arrayOrdenado[k] = numeros2[j];
+    			j++;
+    			k++;
+        	}
+        	
+        	return arrayOrdenado;
+    		
+    	}
+    	
+    }
 	
 	public static void mostrar(long[] array) {
     	System.out.println("Array ordenado: " + Arrays.toString(array));
@@ -285,7 +322,8 @@ public class PruebaMetodosOrdenamiento {
         	System.out.println("7.- Metodo quick");
         	System.out.println("8.- Metodo shell");
         	System.out.println("9.- Metodo radix");
-        	System.out.println("10.- Salir");
+        	System.out.println("10.- Metodo de intercalacion");
+        	System.out.println("11.- Salir");
         	System.out.print("Introduce una opcion: ");
 			
         	long []array2 = array.clone();
@@ -343,6 +381,33 @@ public class PruebaMetodosOrdenamiento {
     				break;
     			
     			case 10:
+    				
+    				long array3[];
+    				long array4[];
+    				
+    				System.out.println("\nVamos a crear un nuevo array para ordenar con respecto al anterior");
+
+    				while(true) {
+    					try {
+    						array3 = ingresar();
+    						break;
+    					}catch(InputMismatchException error){
+    						System.out.println("Error " + error + " en la entrada de datos");
+    					}
+    					System.out.println();
+    				}
+    				
+    				MetodosOrdenamiento.QuickSort.ejecutar(array3);
+    				System.out.println("Primero Array: " + Arrays.toString(array2));
+    				MetodosOrdenamiento.QuickSort.ejecutar(array2);
+    				System.out.println("Segundo Array: " + Arrays.toString(array3));
+    				System.out.println();
+
+    				array4 = MetodosOrdenamiento.Intercalacion.intercalacion(array2, array3);
+    				MetodosOrdenamiento.mostrar(array4);
+    				break;
+    			
+    			case 11:
     				candado = false;
     				System.out.println("--------------Programa terminado-----------");
     				break;
