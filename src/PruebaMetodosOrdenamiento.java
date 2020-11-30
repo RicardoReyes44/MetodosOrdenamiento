@@ -398,9 +398,9 @@ public class PruebaMetodosOrdenamiento {
     				}
     				
     				MetodosOrdenamiento.QuickSort.ejecutar(array3);
-    				System.out.println("Primero Array: " + Arrays.toString(array2));
+    				System.out.println("Primer Array: " + Arrays.toString(array2));
     				MetodosOrdenamiento.QuickSort.ejecutar(array2);
-    				System.out.println("Segundo Array: " + Arrays.toString(array3));
+    				System.out.println("Segund Array: " + Arrays.toString(array3));
     				System.out.println();
 
     				array4 = MetodosOrdenamiento.Intercalacion.intercalacion(array2, array3);
