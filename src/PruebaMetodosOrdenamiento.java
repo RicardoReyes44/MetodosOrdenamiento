@@ -255,6 +255,70 @@ class MetodosOrdenamiento{
     	}
     	
     }
+    
+    static class OrdenamientoMezclaDirecta{
+    	
+    	public static long[] ordenamientoMezcla(long arreglo[]) {
+    		int i,j,k;
+    		
+    		if(arreglo.length>1) {
+    			int numElementosIzq = arreglo.length/2;
+    			int numElementosDer=arreglo.length-numElementosIzq;
+    			
+    			long arregloIzquierdo[] = new long[numElementosIzq];
+    			long arregloDerecho[] = new long[numElementosDer];
+    			
+    			for(i=0; i<numElementosIzq; i++) {
+    				arregloIzquierdo[i] = arreglo[i];
+    			}
+    			
+    			for(i=numElementosIzq; i<numElementosIzq+numElementosDer; i++) {
+    				arregloDerecho[i-numElementosIzq]=arreglo[i];
+    			}
+    			
+    			//Ahora se aplica la recursividad
+    			arregloIzquierdo = ordenamientoMezcla(arregloIzquierdo);
+    			arregloDerecho = ordenamientoMezcla(arregloDerecho);
+    			i=j=k=0;
+    			/*
+    			 * i= posicion en el arreglo original
+    			 * j= posicion en el arreglo izquierdo
+    			 * k= posicion en el arreglo derecho
+    			 * 
+    			*/
+    			
+    			while(arregloIzquierdo.length!=j && arregloDerecho.length!=k) {
+    				if(arregloIzquierdo[j]<arregloDerecho[k]) {
+    					arreglo[i] = arregloIzquierdo[j];
+    					i++;
+    					j++;
+    				}else {
+    					arreglo[i] = arregloDerecho[k];
+    					i++;
+    					k++;
+    				}
+    			}
+    			
+    			//Arreglo izquierdo
+    			while(arregloIzquierdo.length!=j) {
+    				arreglo[i] = arregloIzquierdo[j];
+    				i++;
+    				j++;
+    			}
+    			
+    			while(arregloDerecho.length!=k) {
+    				arreglo[i] = arregloDerecho[k];
+    				i++;
+    				k++;
+    			}
+    			
+    		}// if
+    		
+    		return arreglo;
+    	}
+    	
+    }
+    
 	
 	public static void mostrar(long[] array) {
     	System.out.println("Array ordenado: " + Arrays.toString(array));
@@ -323,7 +387,8 @@ public class PruebaMetodosOrdenamiento {
         	System.out.println("8.- Metodo shell");
         	System.out.println("9.- Metodo radix");
         	System.out.println("10.- Metodo de intercalacion");
-        	System.out.println("11.- Salir");
+        	System.out.println("11.- Metodo de mezcla directa");
+        	System.out.println("12.- Salir");
         	System.out.print("Introduce una opcion: ");
 			
         	long []array2 = array.clone();
@@ -408,6 +473,11 @@ public class PruebaMetodosOrdenamiento {
     				break;
     			
     			case 11:
+    				MetodosOrdenamiento.OrdenamientoMezclaDirecta.ordenamientoMezcla(array2);
+                    MetodosOrdenamiento.mostrar(array2);
+                    break;
+
+    			case 12:
     				candado = false;
     				System.out.println("--------------Programa terminado-----------");
     				break;
