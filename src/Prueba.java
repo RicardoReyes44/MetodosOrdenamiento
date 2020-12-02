@@ -1,8 +1,9 @@
 import java.util.Arrays;
 
+
 class OrdenamientoMezclaDirecta{
 	
-	public int[] ordenamientoMezcla(int arreglo[]) {
+	public void mezclaDirecta2(int arreglo[]) {
 		int i,j,k;
 		
 		if(arreglo.length>1) {
@@ -21,8 +22,8 @@ class OrdenamientoMezclaDirecta{
 			}
 			
 			//Ahora se aplica la recursividad
-			arregloIzquierdo = ordenamientoMezcla(arregloIzquierdo);
-			arregloDerecho = ordenamientoMezcla(arregloDerecho);
+			mezclaDirecta2(arregloIzquierdo);
+			mezclaDirecta2(arregloDerecho);
 			i=j=k=0;
 			/*
 			 * i= posicion en el arreglo original
@@ -55,11 +56,41 @@ class OrdenamientoMezclaDirecta{
 				i++;
 				k++;
 			}
+		    }//if
 			
-		}// if
+		}
 		
-		return arreglo;
-	}
+		public void mezclaNatural(int numeros[]) {
+
+	        int izquierda = 0;
+	        int izq = 0;
+	        int derecha = numeros.length-1;
+	        int der = derecha;
+	        boolean ordenado = false;
+	        do {
+	        	
+	        	izquierda = 0;
+	        	ordenado = true;
+	        	
+	        	while(izquierda<derecha) {
+	        		izq = izquierda;
+	        		while(izq<derecha && numeros[izq]<=numeros[izq+1]) {
+	        			izq++;
+	        		}
+	        		der = izq+1;
+	        		while(der==derecha-1 || der<derecha && numeros[der]<=numeros[der+1]) {	
+	        		}
+	        		
+	        		if(der<=derecha) {
+	        			mezclaDirecta2(numeros);
+	        			
+	        			ordenado = false;
+	        		}
+	        		izquierda = izq;
+	        	}
+	        	
+	        }while(!ordenado);
+		}
 	
 }
 
@@ -68,14 +99,13 @@ public class Prueba {
 
 	public static void main(String[] args) {
 
-		OrdenamientoMezclaDirecta o1 = new OrdenamientoMezclaDirecta();
+		OrdenamientoMezclaDirecta mn = new OrdenamientoMezclaDirecta();
 		
-		int vector[] = {5, 10, 7, 4, 1, 8, 2, 3, 6, 9};
+		int numeros[] = {60, 30, 20, 10, 100, 80, 90, 40, 70, 50};
+		System.out.println("Array desordenado: " + Arrays.toString(numeros));
+		mn.mezclaNatural(numeros);
+		System.out.println("Array ordenado: " + Arrays.toString(numeros));
 		
-		System.out.println("Vector desordenado: " + Arrays.toString(vector));
-		
-		int vector2[] = o1.ordenamientoMezcla(vector);
-        System.out.println("Vector ordenado: " + Arrays.toString(vector2));
 		
 	}
 
